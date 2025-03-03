@@ -61,13 +61,27 @@ rag_project/
 
 │
 
-│── frontend/                  # React.js frontend 
+frontend/
 
-│   │── src/                   # React source files
+│── src/
 
-│   │── public/                # Static files
+│   │── components/
 
-│   │── package.json           # Frontend dependencies
+│   │   │── Sidebar.js     # Sidebar UI with file upload
+
+│   │   │── Upload.js      # Handles PDF upload
+
+│   │   │── Chatbox.js     # Main chat UI
+
+│   │── App.js             # Main layout
+
+│   │── api.js             # API requests
+
+│── public/
+
+│── package.json
+
+│── index.js
 
 │
 
