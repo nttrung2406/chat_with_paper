@@ -5,9 +5,8 @@ A RAG application for q&amp;a with paper
 
 1. Core AI (LLM for RAG)
 
-✅ LLaVA (LLaMA + Vision Adapter) – Handles text + images/tables.
+✅ CLIP – Handles text + images/tables.
 
-✅ Quantized versions (GGUF with llama.cpp) – Makes inference lightweight and runs on consumer GPUs/CPUs.
 
 💡 Inference Engine: Use llama.cpp for ultra-lightweight deployment.
 
@@ -19,7 +18,7 @@ A RAG application for q&amp;a with paper
 
 4. Vector Search (Hybrid Search)
    
-✅ Milvus (Lite Mode)
+✅ MongoDB (Since Milvus does not support windows)
 
 6. Backend & Model Serving
    
@@ -39,21 +38,21 @@ rag_project/
 
 │── backend/                   # Backend server (FastAPI)
 
-│   │── models/                # LLaVA models (GGUF)
+│   │── models/                
 
 │   │── services/              # Core logic (PDF parsing, OCR, embedding)
 
 │   │   │── pdf_processor.py   # PyMuPDF & PaddleOCR for text extraction
 
-│   │   │── vector_store.py    # Milvus integration for storing/retrieving embeddings
+│   │   │── vector_store.py    # Mongo integration for storing/retrieving embeddings
 
-│   │   │── llm_inference.py   # LLaVA inference (llama.cpp)
+│   │   │── inference.py       # model inference (llama.cpp)
 
 │   │── routes/                # API endpoints
 
 │   │   │── pdf_routes.py      # PDF upload and processing
 
-│   │   │── search_routes.py   # Query retrieval from Milvus
+│   │   │── search_routes.py   # Query retrieval from MongoDB
 
 │   │── main.py                # FastAPI entry point
 
