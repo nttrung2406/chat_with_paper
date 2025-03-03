@@ -1,29 +1,39 @@
 import torch
+from transformers import CLIPProcessor, CLIPModel
+from transformers import AutoModelForCausalLM, AutoTokenizer
 from PIL import Image
 from llama_cpp import Llama
+class CLIPEmbedding:
+    def __init__(self):
+        self.model = CLIPModel.from_pretrained("openai/clip-vit-base-patch32")
+        self.processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32")
+    
+    def get_text_embedding(self, text):
+        max_length = 77 
+        tokens = self.processor.tokenizer(text, return_tensors="pt", padding=True, truncation=True, max_length=max_length)
+        
+        with torch.no_grad():
+            embedding = self.model.get_text_features(**tokens)
+        
+        return embedding.squeeze().tolist()
+    
+    def get_image_embedding(self, image):
+        inputs = self.processor(images=image, return_tensors="pt")
+        with torch.no_grad():
+            embedding = self.model.get_image_features(**inputs)
+        return embedding.squeeze().tolist()
 
-MODEL_PATH = "models/llava.gguf"
 
-class LLaVAModel:
+MODEL_PATH = "models/gemma-2b-it.Q4_K_M.gguf"  
+
+class GemmaModel:
     def __init__(self, model_path=MODEL_PATH):
-        self.model = Llama(model_path=model_path, n_ctx=4096)  # Adjust context size
+        self.model = Llama(model_path=model_path, n_ctx=4096, n_threads=6)
 
     def extract_text(self, text_prompt):
-        """Generate response from LLaVA given a text prompt."""
+        """Generate response from Gemma."""
         output = self.model(text_prompt)
         return output["choices"][0]["text"].strip()
 
-    def extract_image(self, image_path):
-        """Extract and process image data with LLaVA."""
-        img = Image.open(image_path).convert("RGB")
-        
-        # Convert image to tensor format
-        img_tensor = torch.tensor(list(img.getdata()), dtype=torch.float32).view(1, *img.size, -1)
-
-        # Generate response using LLaVA
-        prompt = "Describe this image in detail."
-        output = self.model(prompt, images=[img_tensor])
-
-        return output["choices"][0]["text"].strip()
-
-llava = LLaVAModel()
+rag_model = GemmaModel()
+clip_model = CLIPEmbedding()
