@@ -1,16 +1,23 @@
-from pymilvus import connections, Collection
-import numpy as np
-connections.connect(alias="default")
+from pymongo import MongoClient
+from sentence_transformers import SentenceTransformer
+import torch
 
-collection = Collection("documents")
-query_embedding = np.random.rand(1, 512).tolist()
+client = MongoClient("mongodb+srv://admin:admin@cluster0.ooufc.mongodb.net/")
+db = client["rag_db"]
+collection = db["embeddings"]
+text_embedder = SentenceTransformer("all-MiniLM-L6-v2")  
 
-search_results = collection.search(
-    data=query_embedding,
-    anns_field="embedding",
-    param={"metric_type": "L2"},
-    limit=3
-)
-
-for result in search_results[0]:
-    print(f"Matched ID: {result.id}, Distance: {result.distance}")
+def search_relevant_passages(query, top_k=3):
+    """Retrieve relevant text passages from MongoDB."""
+    query_embedding = text_embedder.encode(query).tolist()
+    
+    results = collection.find()
+    sorted_results = sorted(
+        results,
+        key=lambda x: torch.cosine_similarity(
+            torch.tensor(query_embedding), torch.tensor(x["embedding"]), dim=0
+        ),
+        reverse=True
+    )
+    
+    return [r["text"] for r in sorted_results[:top_k]]
