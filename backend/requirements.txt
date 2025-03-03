@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+pymupdf
+paddleocr
+pymilvus
+llama-cpp-python
+paddlepaddle
