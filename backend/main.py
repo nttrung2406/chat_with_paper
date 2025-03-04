@@ -1,17 +1,24 @@
 from fastapi import FastAPI
-from routes import pdfRoutes, searchRoutes, chatRoutes
+from routes import pdfRoutes, searchRoutes, chatRoutes, welcomeRouter
+from fastapi.middleware.cors import CORSMiddleware
 
-app = FastAPI(title="RAG System with LLaVA and Milvus")
+app = FastAPI(title="RAG System")
 
-# Include routes
-app.include_router(pdfRoutes.router, prefix="/pdf", tags=["PDF Processing"])
-app.include_router(searchRoutes.router, prefix="/search", tags=["Search"])
-app.include_router(chatRoutes.router, prefix="/chat", tags=["Chat"])
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  
+    allow_credentials=True,
+    allow_methods=["*"],   
+    allow_headers=["*"],
+)
 
-@app.get("/")
-def home():
-    return {"message": "Welcome to LLaVA-powered RAG Chatbot!"}
+app.include_router(welcomeRouter.router, prefix="/welcome")
+app.include_router(pdfRoutes.router, prefix="/pdf")
+app.include_router(searchRoutes.router, prefix="/search")
+app.include_router(chatRoutes.router, prefix="/chat")
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="127.0.0.1", port=8000)
+
+ 
