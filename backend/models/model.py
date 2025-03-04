@@ -1,8 +1,12 @@
 import torch
 from transformers import CLIPProcessor, CLIPModel
-from transformers import AutoModelForCausalLM, AutoTokenizer
 from PIL import Image
 from llama_cpp import Llama
+import os
+root = os.getcwd()
+
+MODEL_PATH = os.path.join(root, "models", "gemma-2b.gguf")  
+
 class CLIPEmbedding:
     def __init__(self):
         self.model = CLIPModel.from_pretrained("openai/clip-vit-base-patch32")
@@ -24,15 +28,18 @@ class CLIPEmbedding:
         return embedding.squeeze().tolist()
 
 
-MODEL_PATH = "models/gemma-2b-it.Q4_K_M.gguf"  
-
 class GemmaModel:
     def __init__(self, model_path=MODEL_PATH):
         self.model = Llama(model_path=model_path, n_ctx=4096, n_threads=6)
 
-    def extract_text(self, text_prompt):
-        """Generate response from Gemma."""
-        output = self.model(text_prompt)
+    def extract_text(self, text_prompt, max_tokens=1000, temperature=0.7):
+        """Generate a longer response from Gemma."""
+        output = self.model(
+            text_prompt, 
+            max_tokens=max_tokens, 
+            temperature=temperature,  
+            top_p=0.9  
+        )
         return output["choices"][0]["text"].strip()
 
 rag_model = GemmaModel()
