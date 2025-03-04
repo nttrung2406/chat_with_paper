@@ -1,13 +1,13 @@
-from fastapi import APIRouter, UploadFile, File
-import shutil
+from fastapi import APIRouter, UploadFile, File, HTTPException
 from services.inference import process_pdf
 
 router = APIRouter()
 
-@router.post("/upload")
-def upload_pdf(file: UploadFile = File(...)):
-    file_path = f"{file.filename}"
-    with open(file_path, "wb") as buffer:
-        shutil.copyfileobj(file.file, buffer)
-    message = process_pdf(file_path)
-    return {"message": message}
+@router.post("/upload/")
+async def upload_pdf(file: UploadFile = File(...)):
+    try:
+        file_content = await file.read()
+        result = process_pdf(file_content)
+        return {"message": result}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
