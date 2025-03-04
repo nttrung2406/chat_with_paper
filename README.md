@@ -7,7 +7,6 @@ A RAG application for q&amp;a with paper
 
 ✅ CLIP – Handles text + images/tables.
 
-
 💡 Inference Engine: Use llama.cpp for ultra-lightweight deployment.
 
 2. PDF Processing
@@ -32,89 +31,8 @@ A RAG application for q&amp;a with paper
 
 ✅ Grafana – Visualizes logs and performance.
 
-# Project structure
+# Workflow
 
-rag_project/
+![image](https://github.com/user-attachments/assets/5a72961b-40b1-402e-b7e6-081078e064e2)
 
-│── backend/                   # Backend server (FastAPI)
-
-│   │── models/                
-
-│   │── services/              # Core logic (PDF parsing, OCR, embedding)
-
-│   │   │── pdf_processor.py   # PyMuPDF & PaddleOCR for text extraction
-
-│   │   │── vector_store.py    # Mongo integration for storing/retrieving embeddings
-
-│   │   │── inference.py       # model inference (llama.cpp)
-
-│   │── routes/                # API endpoints
-
-│   │   │── pdf_routes.py      # PDF upload and processing
-
-│   │   │── search_routes.py   # Query retrieval from MongoDB
-
-│   │── main.py                # FastAPI entry point
-
-│   │── requirements.txt       # Python dependencies
-
-│
-
-frontend/
-
-│── src/
-
-│   │── components/
-
-│   │   │── Sidebar.js     # Sidebar UI with file upload
-
-│   │   │── Upload.js      # Handles PDF upload
-
-│   │   │── Chatbox.js     # Main chat UI
-
-│   │── App.js             # Main layout
-
-│   │── api.js             # API requests
-
-│── public/
-
-│── package.json
-
-│── index.js
-
-│
-
-│── milvus/                    # Vector search setup
-
-│   │── docker-compose.yml      # Milvus standalone setup 
-
-│   │── config.yaml             # Milvus configuration
-
-│
-
-│── monitoring/                # Prometheus & Grafana
-
-│   │── prometheus.yml          # Prometheus config
-
-│   │── grafana/                # Grafana dashboards
-
-│
-
-│── scripts/                   # Utility scripts
-
-│   │── setup_milvus.py         # Initializes Milvus collections
-
-│   │── download_model.sh       # Downloads LLaVA GGUF model
-
-│
-
-│── config/                    # Configurations for the project
-
-│   │── settings.py             # App settings
-
-│
-
-│── README.md                  # Project documentation
-
-│── .env                        # Environment variables (e.g., Milvus host, API keys)
 
