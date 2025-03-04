@@ -7,7 +7,7 @@ db = client["rag_db"]
 collection = db["embeddings"]
 text_embedder = SentenceTransformer("all-mpnet-base-v2") 
 
-def search_relevant_passages(query, top_k=3):
+def search_relevant_passages(query, top_k=5):
     """Retrieve relevant text passages from MongoDB."""
     query_embedding = text_embedder.encode(query)  
     query_tensor = torch.tensor(query_embedding).unsqueeze(0)  
