@@ -2,24 +2,37 @@ import React, { useState } from "react";
 import { chatWithRAG } from "../api";
 
 const Chatbox = () => {
-  const [message, setMessage] = useState("");
-  const [chatHistory, setChatHistory] = useState([]);
+  const [message, setMessage] = useState("");  
+  const [chatHistory, setChatHistory] = useState([]); 
 
-  const handleSend = async () => {
-    if (!message.trim()) return;
+  async function handleSend() {
+    const userMessage = message.trim();
+    if (!userMessage) return;
 
-    const userMessage = { sender: "user", text: message };
-    setChatHistory([...chatHistory, userMessage]);
+    setChatHistory((prev) => [...prev, { sender: "user", text: userMessage }]);
 
     try {
-      const response = await chatWithRAG(message);
-      const botMessage = { sender: "bot", text: response.data.answer };
-      setChatHistory([...chatHistory, userMessage, botMessage]);
+      const botResponse = await chatWithRAG(userMessage);
+
+      setChatHistory((prev) => [
+        ...prev,
+        { sender: "bot", text: botResponse || "No response from server" },
+      ]);
     } catch (error) {
-      console.error("Chat failed:", error);
+      console.error("Error in handleSend:", error);
+      setChatHistory((prev) => [
+        ...prev,
+        { sender: "bot", text: "Error: Unable to get a response." },
+      ]);
     }
 
-    setMessage("");
+    setMessage(""); 
+  }
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSend();
+    }
   };
 
   return (
@@ -36,6 +49,7 @@ const Chatbox = () => {
           type="text"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
+          onKeyDown={handleKeyPress}
           placeholder="Ask something..."
         />
         <button onClick={handleSend}>Send</button>
