@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { chatWithRAG } from "../api";
+import "../style/chatbox.css";
 
 const Chatbox = () => {
-  const [message, setMessage] = useState("");  
-  const [chatHistory, setChatHistory] = useState([]); 
+  const [message, setMessage] = useState("");
+  const [chatHistory, setChatHistory] = useState([]);
+  const navigate = useNavigate();
 
   async function handleSend() {
     const userMessage = message.trim();
@@ -26,7 +29,7 @@ const Chatbox = () => {
       ]);
     }
 
-    setMessage(""); 
+    setMessage("");
   }
 
   const handleKeyPress = (e) => {
@@ -35,11 +38,21 @@ const Chatbox = () => {
     }
   };
 
+  const handleLoginClick = () => {
+    navigate("/login");
+  };
+
   return (
     <div className="chatbox">
+      <div className="header">
+        <button className="login-button" onClick={handleLoginClick}>
+          Login
+        </button>
+        <button className="logout-button">Logout</button>
+      </div>
       <div className="messages">
         {chatHistory.map((msg, index) => (
-          <div key={index} className={msg.sender}>
+          <div key={index} className={`message ${msg.sender}`}>
             <strong>{msg.sender === "user" ? "You" : "Bot"}:</strong> {msg.text}
           </div>
         ))}

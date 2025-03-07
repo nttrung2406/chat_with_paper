@@ -13,7 +13,7 @@ class CLIPEmbedding:
         self.processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32")
     
     def get_text_embedding(self, text):
-        max_length = 77 
+        max_length = 77
         tokens = self.processor.tokenizer(text, return_tensors="pt", padding=True, truncation=True, max_length=max_length)
         
         with torch.no_grad():

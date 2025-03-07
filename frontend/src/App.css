@@ -17,7 +17,7 @@ body {
 .sidebar {
   width: 250px;
   background: #202123;
-  padding: 20px;
+  padding: 25px;
   color: #fff;
   display: flex;
   flex-direction: column;
@@ -46,7 +46,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 20px;
+  padding: 4px;
   background: #343541;
 }
 

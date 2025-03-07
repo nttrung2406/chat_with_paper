@@ -1,0 +1,31 @@
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background: #202123;
+    padding: 25px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 97vh;
+    border-radius: 5px;
+  }
+  
+  .sidebar h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .sidebar h2 {
+    font-size: 18px;
+    margin-bottom: 15px;
+  }
+  
+  .sidebar-footer {
+    font-size: 12px;
+    color: #aaa;
+    text-align: center;
+    margin-top: auto;
+    padding-top: 10px;
+    border-top: 1px solid #444654;
+  }

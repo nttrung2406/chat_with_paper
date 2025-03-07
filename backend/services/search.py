@@ -1,30 +1,32 @@
 from pymongo import MongoClient
-from sentence_transformers import SentenceTransformer
+from transformers import CLIPProcessor, CLIPModel
 import torch
 
 client = MongoClient("mongodb+srv://admin:admin@cluster0.ooufc.mongodb.net/")
 db = client["rag_db"]
 collection = db["embeddings"]
-text_embedder = SentenceTransformer("all-mpnet-base-v2") 
+clip_model = CLIPModel.from_pretrained("openai/clip-vit-base-patch32")
+processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32")
 
 def search_relevant_passages(query, top_k=5):
-    """Retrieve relevant text passages from MongoDB."""
-    query_embedding = text_embedder.encode(query)  
-    query_tensor = torch.tensor(query_embedding).unsqueeze(0)  
+    """Retrieve relevant text passages using CLIP embeddings."""
+    inputs = processor(text=query, return_tensors="pt", padding=True, truncation=True)
+    query_embedding = clip_model.get_text_features(**inputs).detach().numpy().flatten()  # Ensure 512-dim
 
-    results = collection.find()
-    passages = []
-    
-    for doc in results:
-        stored_embedding = torch.tensor(doc["embedding"])
+    results = list(collection.find())
 
-        if query_tensor.shape[1] != stored_embedding.shape[0]:
-            print(f"Shape Mismatch: Query={query_tensor.shape}, Stored={stored_embedding.shape}")
-            continue 
+    if not results:
+        print("⚠️ No documents found in MongoDB.")
+        return []
 
-        similarity = torch.cosine_similarity(query_tensor, stored_embedding.unsqueeze(0))
-        passages.append((doc["text"], similarity.item()))
+    sorted_results = sorted(
+        results,
+        key=lambda x: torch.cosine_similarity(
+            torch.tensor(query_embedding), torch.tensor(x["embedding"]), dim=0
+        ),
+        reverse=True
+    )
+    if sorted_results[0]["score"] < 0.3:  
+        return "Please ask another question."
 
-    sorted_results = sorted(passages, key=lambda x: x[1], reverse=True)
-    
-    return [r[0] for r in sorted_results[:top_k]]
+    return [r["text"] for r in sorted_results[:top_k]]

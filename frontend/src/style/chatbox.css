@@ -1,0 +1,105 @@
+/* Global dark theme */
+body {
+    background-color: #343541;
+    color: #d1d5db;
+    font-family: "Arial", sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Chatbox */
+  .chatbox {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding: 20px;
+    background: #343541;
+  }
+  
+  /* Header */
+  .header {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+  }
+  
+  .login-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  
+  .logout-button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  /* Messages */
+  .messages {
+    flex-grow: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    background: #202123;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .message {
+    max-width: 70%;
+    padding: 10px 15px;
+    border-radius: 10px;
+  }
+  
+  .user {
+    align-self: flex-end;
+    background: #0a84ff;
+    color: white;
+  }
+  
+  .bot {
+    align-self: flex-start;
+    background: #444654;
+    color: white;
+  }
+  
+  /* Input Area */
+  .input-area {
+    display: flex;
+    padding: 10px;
+    background: #202123;
+    border-top: 1px solid #444654;
+    border-radius: 10px;
+  }
+  
+  .input-area input {
+    flex-grow: 1;
+    padding: 12px;
+    background: #444654;
+    color: white;
+    border: 1px solid #555;
+    border-radius: 5px;
+    outline: none;
+  }
+  
+  .input-area button {
+    padding: 12px 20px;
+    background: #0a84ff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-left: 10px;
+    cursor: pointer;
+  }
+  
+  .input-area button:hover {
+    background: #0073e6;
+  }

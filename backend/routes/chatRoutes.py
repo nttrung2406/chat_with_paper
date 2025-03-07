@@ -11,7 +11,11 @@ class ChatRequest(BaseModel):
 @router.post("/text")
 async def chat_with_rag(request: ChatRequest):
     try:
-        prompt = request.prompt
+        prompt = request.prompt.strip().lower()
+
+        if prompt in ["hi", "hello", "hey"]:
+            return {"answer": "Hello! How can I help you today?"}
+
         relevant_passages = search_relevant_passages(prompt)
         context = " ".join(relevant_passages)
 
@@ -20,7 +24,6 @@ async def chat_with_rag(request: ChatRequest):
 
         full_prompt = f"Using this information, answer the question: {prompt}\n\n{context}"
         
-        print("📝 Full Prompt Sent to Model:\n", full_prompt)  # Debugging line
 
         response = rag_model.extract_text(full_prompt)
         return {"answer": response}
