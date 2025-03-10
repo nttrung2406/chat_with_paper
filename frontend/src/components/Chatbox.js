@@ -48,7 +48,6 @@ const Chatbox = () => {
         <button className="login-button" onClick={handleLoginClick}>
           Login
         </button>
-        <button className="logout-button">Logout</button>
       </div>
       <div className="messages">
         {chatHistory.map((msg, index) => (

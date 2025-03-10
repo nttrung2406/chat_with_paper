@@ -1,31 +1,33 @@
 /* Sidebar */
-.sidebar {
+
+  
+  .sidebar {
     width: 250px;
-    background: #202123;
-    padding: 25px;
-    color: #fff;
+    background-color: #202123;
+    padding: 20px;
+    border-right: 1px solid #333;
+    height: 95vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    height: 97vh;
-    border-radius: 5px;
   }
-  
+
   .sidebar h1 {
-    font-size: 24px;
+    font-size: 28px;
     margin-bottom: 20px;
+    color: #fff;
   }
   
   .sidebar h2 {
-    font-size: 18px;
-    margin-bottom: 15px;
+    color: #fff;
+    font-size: 1.5em;
+    margin-bottom: 20px;
   }
   
   .sidebar-footer {
-    font-size: 12px;
+    font-size: 20px;
     color: #aaa;
     text-align: center;
     margin-top: auto;
-    padding-top: 10px;
+    padding-top: 28px;
     border-top: 1px solid #444654;
   }

@@ -1,0 +1,44 @@
+/* UploadButton.css */
+
+.upload-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align items to the left */
+    width: 100%; /* Ensure it takes full width of sidebar */
+  }
+  
+  .custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+    font-size: 12px; 
+    margin-bottom: 5px; 
+  }
+  
+  .custom-file-upload:hover {
+    background-color: #e0e0e0;
+  }
+  
+  #file-upload {
+    display: none; 
+  }
+  
+  .upload-status {
+    font-size: 10px; 
+    color: #555;
+    margin-top: 5px;
+  }
+  
+
+  @media (max-width: 600px) {
+      .custom-file-upload {
+          font-size: 10px;
+          padding: 4px 8px;
+      }
+      .upload-status{
+          font-size: 8px;
+      }
+  }
