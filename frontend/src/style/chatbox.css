@@ -17,6 +17,9 @@ body {
     background: #202123;
     max-height: 100vh;
   }
+  .chatbox.active {
+    opacity: 1; /* Remove transparency when chat starts */
+  }
     
   /* Header */
   .header {
@@ -58,6 +61,7 @@ body {
     border-radius: 10px;
     /* margin-bottom: 10px; */
   }
+
   
   .message {
     max-width: 70%;

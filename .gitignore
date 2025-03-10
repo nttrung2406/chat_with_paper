@@ -1,2 +1,4 @@
 *.gguf
 *.pack
+*.pack
+/frontend/node_modules
