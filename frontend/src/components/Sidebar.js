@@ -6,7 +6,7 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
       <h1>Chat with PDF</h1>
-      <h2>Upload PDF</h2>
+      <h3>Upload PDF</h3>
       <Upload />
       <footer className="sidebar-footer">By @ Trung Nguyen</footer>
     </div>

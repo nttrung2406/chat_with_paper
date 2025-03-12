@@ -18,6 +18,7 @@ const Upload = () => {
     setStatus("Uploading...");
     try {
       const response = await uploadPDF(file);
+      console.log(response);
       setStatus("Upload Successful!");
     } catch (error) {
       setStatus("Upload failed!");

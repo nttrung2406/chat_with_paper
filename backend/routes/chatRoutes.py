@@ -22,7 +22,7 @@ async def chat_with_rag(request: ChatRequest):
         if not relevant_passages:
             print("⚠️ No relevant passages found. The bot might hallucinate.")
 
-        full_prompt = f"Using this information, answer the question: {prompt}\n\n{context}"
+        full_prompt = f"Using this information with relevant specific knowledge, answer the question: {prompt}\n\n{context}"
         
 
         response = rag_model.extract_text(full_prompt)

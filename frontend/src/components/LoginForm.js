@@ -1,51 +1,62 @@
 import React, { useState } from "react";
 import axios from "axios";
-import '../style/loginform.css';
+import "../style/loginform.css";
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
-    login: '',
-    password: '',
-    mfaCode: '',
+    username: "",
+    password: "",
     rememberMe: false,
   });
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      [name]: type === 'checkbox' ? checked : value,
+      [name]: type === "checkbox" ? checked : value,
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    setError(""); 
 
     try {
-      const response = await axios.post('/api/auth/login', formData);
-      console.log('Login successful:', response.data);
+      const loginData = new URLSearchParams();
+      loginData.append("username", formData.username);
+      loginData.append("password", formData.password);
+
+      const response = await axios.post("http://127.0.0.1:8000/token", loginData, {
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      });
+
+      const { access_token } = response.data;
+      localStorage.setItem("token", access_token);
+
+      alert("Login successful!");
+      console.log("Token:", access_token);
     } catch (error) {
-      console.error('Login failed:', error.response ? error.response.data : error.message);
+      setError(error.response?.data?.detail || "Login failed. Please try again.");
     }
   };
-
 
   return (
     <div className="login-container">
       <div className="login-form">
-        <div className="logo">AA</div>
-        <h2>Sign in to dashboard</h2>
+        <div className="logo">WELCOME</div>
+        <h2>Log in</h2>
+        {error && <div className="error-message">{error}</div>}
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="login">Login</label>
+            <label htmlFor="username">Username</label>
             <input
               type="text"
-              id="login"
-              name="login"
-              value={formData.login}
+              id="username"
+              name="username"
+              value={formData.username}
               onChange={handleChange}
-              placeholder="Enter your login..."
+              placeholder="Enter your username..."
               required
             />
           </div>
@@ -61,18 +72,6 @@ const LoginForm = () => {
               required
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="mfaCode">MFA Code</label>
-            <input
-              type="text"
-              id="mfaCode"
-              name="mfaCode"
-              value={formData.mfaCode}
-              onChange={handleChange}
-              placeholder="Enter your code..."
-              required
-            />
-          </div>
           <div className="form-options">
             <label>
               <input
@@ -80,12 +79,12 @@ const LoginForm = () => {
                 name="rememberMe"
                 checked={formData.rememberMe}
                 onChange={handleChange}
-              />{' '}
+              />{" "}
               Remember me
             </label>
             <a href="#forgot-password">Forgot password?</a>
           </div>
-          <button type="submit" className="login-button">
+          <button type="submit" className="login-but">
             LOGIN
           </button>
         </form>

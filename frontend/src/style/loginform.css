@@ -1,8 +1,9 @@
 .login-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    min-height: 95vh;
+    min-width: 213lvh;
     background: linear-gradient(135deg, #00d4ff, #007bff);
     padding: 20px;
     font-family: Arial, sans-serif;
@@ -14,15 +15,21 @@
     border-radius: 15px;
     color: #fff;
     width: 45%;
+    max-width: 500px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
   }
   
   .logo {
-    font-size: 24px;
+    font-size: 28px;
     font-weight: bold;
     text-align: center;
     margin-bottom: 20px;
     color: #00ff00;
+  }
+
+  h2 {
+    text-align: center;
+    margin-bottom: 30px;
   }
     
   .form-group {
@@ -32,33 +39,68 @@
   label {
     display: block;
     margin-bottom: 5px;
-    font-size: 14px;
+    font-size: 15px;
+  }
+
+  input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: #333;
+    color: #fff;
+    font-size: 15px;
+    margin-left: -10px;
   }
   
   .form-options {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-bottom: 20px;
+  }
+
+  .form-options label {
+      display: flex;
+      align-items: center; 
   }
   
   .form-options a {
     color: #00ff00;
     text-decoration: none;
-    font-size: 12px;
+    font-size: 15px;
   }
   
   .form-options a:hover {
     text-decoration: underline;
   }
   
- 
-  .join-community {
-    background: rgba(0, 0, 0, 0.6);
-    padding: 40px;
-    border-radius: 15px;
-    color: #fff;
-    width: 45%;
-    text-align: center;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  .login-but {
+    width: 100%;
+    padding: 12px;
+    background: #00ff00;
+    border: none;
+    border-radius: 5px;
+    color: #000;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
   }
   
+  .login-but:hover {
+    background: #00cc00;
+  }
+  @media (max-width: 768px) {
+    .login-form {
+        width: 80%;
+        padding: 20px;
+    }
+
+    .logo {
+        font-size: 24px;
+    }
+
+    .login-button {
+        font-size: 14px;
+    }
+}
