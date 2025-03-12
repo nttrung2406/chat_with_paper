@@ -5,7 +5,7 @@ A RAG application for q&amp;a with paper
 
 1. Core AI (LLM for RAG)
 
-✅ CLIP – Handles text + images/tables.
+✅ MiniLM – Handles text + images/tables.
 
 💡 Inference Engine: Use llama.cpp for ultra-lightweight deployment.
 
@@ -33,6 +33,7 @@ A RAG application for q&amp;a with paper
 
 # Workflow
 
-![image](https://github.com/user-attachments/assets/fe55d0e3-b4dd-493d-8954-7d0d868ecf1b)
+![image](https://github.com/user-attachments/assets/5f4cc49a-d4ba-4102-850f-acadd451d7f9)
+
 
 
