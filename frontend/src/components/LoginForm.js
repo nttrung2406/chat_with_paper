@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "../style/loginform.css";
+import { Link, useNavigate } from "react-router-dom";
+
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -9,6 +11,7 @@ const LoginForm = () => {
     rememberMe: false,
   });
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -36,9 +39,14 @@ const LoginForm = () => {
 
       alert("Login successful!");
       console.log("Token:", access_token);
+      navigate("/");
     } catch (error) {
       setError(error.response?.data?.detail || "Login failed. Please try again.");
     }
+  };
+
+  const handleSignUpClick = () => {
+    navigate("/signup"); 
   };
 
   return (
@@ -88,6 +96,12 @@ const LoginForm = () => {
             LOGIN
           </button>
         </form>
+        <div className="signup-link">
+          Do not have an account?{" "}
+          <span className="signup-button" onClick={handleSignUpClick}>
+            Sign up
+          </span>
+        </div>
       </div>
     </div>
   );

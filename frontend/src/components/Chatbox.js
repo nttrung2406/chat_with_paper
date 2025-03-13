@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { chatWithRAG } from "../api";
 import "../style/chatbox.css";
-
 const Chatbox = () => {
   const [message, setMessage] = useState("");
   const [chatHistory, setChatHistory] = useState([]);
@@ -45,6 +44,7 @@ const Chatbox = () => {
   return (
     <div className="chatbox">
       <div className="header">
+
         <button className="login-button" onClick={handleLoginClick}>
           Login
         </button>

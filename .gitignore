@@ -5,3 +5,6 @@
 .env
 *.old
 *.pack
+*.old
+*.pack
+/frontend/node_modules

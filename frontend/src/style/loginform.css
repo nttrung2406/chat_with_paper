@@ -90,6 +90,22 @@
   .login-but:hover {
     background: #00cc00;
   }
+
+  .signup-link {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .signup-link .signup-button {
+    color: #00ff00;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  .signup-link .signup-button:hover {
+    color: #007bff;
+    text-decoration: underline; 
+  }
   @media (max-width: 768px) {
     .login-form {
         width: 80%;
@@ -98,9 +114,5 @@
 
     .logo {
         font-size: 24px;
-    }
-
-    .login-button {
-        font-size: 14px;
     }
 }

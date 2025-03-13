@@ -1,6 +1,12 @@
 from pymongo import MongoClient
 import torch
-client = MongoClient("mongodb+srv://admin:admin@cluster0.ooufc.mongodb.net/")
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+mongo_uri = os.getenv("MONGO_URI")
+client = MongoClient(mongo_uri)
 db = client["rag_db"]
 collection = db["embeddings"]
 

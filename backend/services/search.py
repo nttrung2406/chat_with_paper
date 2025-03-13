@@ -1,8 +1,13 @@
 from pymongo import MongoClient
 from sentence_transformers import SentenceTransformer
 import torch
+import os
+from dotenv import load_dotenv
 
-client = MongoClient("mongodb+srv://admin:admin@cluster0.ooufc.mongodb.net/")
+load_dotenv()
+
+mongo_uri = os.getenv("MONGO_URI")
+client = MongoClient(mongo_uri)
 db = client["rag_db"]
 collection = db["embeddings"]
 

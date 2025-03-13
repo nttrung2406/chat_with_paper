@@ -16,11 +16,10 @@ body {
     padding: 4px;
     background: #202123;
     max-height: 100vh;
+    width: 100%; 
+    box-sizing: border-box; 
   }
-  .chatbox.active {
-    opacity: 1; /* Remove transparency when chat starts */
-  }
-    
+
   /* Header */
   .header {
     display: flex;
@@ -38,7 +37,7 @@ body {
     font-weight: bold;
     cursor: pointer;
     margin-left: 1500px;
-    margin-right: 5px;
+    margin-right: auto;
     margin-top: 10px;
   }
   
@@ -104,6 +103,7 @@ body {
     border: 1px solid #555;
     border-radius: 5px;
     outline: none;
+    margin-left: 5px;
   }
   
   .input-area button {
