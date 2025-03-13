@@ -24,7 +24,10 @@ class MiniLMEmbedding:
 
 class LLModel:
     def __init__(self, model_path=MODEL_PATH):
-        self.model = Llama(model_path=model_path, n_ctx=4096, n_threads=6)
+        self.model = Llama(model_path=model_path,
+                            n_ctx=2048, 
+                            n_threads=6,
+                            n_gpu_layers=32 if torch.cuda.is_available() else 0)
 
     def extract_text(self, text_prompt, max_tokens=1000, temperature=0.7):
         """Generate a longer response from Gemma."""

@@ -3,3 +3,5 @@
 *.pack
 /frontend/node_modules
 .env
+*.old
+*.pack

@@ -20,13 +20,18 @@ async def chat_with_rag(request: ChatRequest):
         context = " ".join(relevant_passages)
 
         if not relevant_passages:
-            print("⚠️ No relevant passages found. The bot might hallucinate.")
+            print("---------------------------------No relevant passages found. The bot might hallucinate.------------------------------------")
 
-        full_prompt = f"Using this information with relevant specific knowledge, answer the question: {prompt}\n\n{context}"
-        
+        full_prompt = f"Using this information, provide a **concise and unique** answer to the following question: {prompt}\n\n{context}\n\nLimit your response to a single paragraph."
+
+        print(f"Full prompt: {full_prompt}")
 
         response = rag_model.extract_text(full_prompt)
-        return {"answer": response}
+        cleaned_response = "\n".join(
+            line for line in response.split("\n") if not line.startswith("###:")
+        )
+
+        return {"answer": cleaned_response.strip()}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
