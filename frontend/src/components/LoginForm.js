@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "../style/loginform.css";
-import { Link, useNavigate } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
-    username: "",
+    email: "",
     password: "",
     rememberMe: false,
   });
@@ -23,11 +22,11 @@ const LoginForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(""); 
+    setError("");
 
     try {
       const loginData = new URLSearchParams();
-      loginData.append("username", formData.username);
+      loginData.append("email", formData.email);
       loginData.append("password", formData.password);
 
       const response = await axios.post("http://127.0.0.1:8000/token", loginData, {
@@ -46,7 +45,7 @@ const LoginForm = () => {
   };
 
   const handleSignUpClick = () => {
-    navigate("/signup"); 
+    navigate("/signup");
   };
 
   return (
@@ -57,14 +56,14 @@ const LoginForm = () => {
         {error && <div className="error-message">{error}</div>}
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="username">Username</label>
+            <label htmlFor="username">Email</label>
             <input
               type="text"
-              id="username"
-              name="username"
-              value={formData.username}
+              id="email"
+              name="email"
+              value={formData.email}
               onChange={handleChange}
-              placeholder="Enter your username..."
+              placeholder="Enter your email..."
               required
             />
           </div>

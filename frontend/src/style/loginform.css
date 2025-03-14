@@ -3,7 +3,7 @@
     justify-content: center;
     align-items: center;
     min-height: 95vh;
-    min-width: 213lvh;
+    width: 213lvh;
     background: linear-gradient(135deg, #00d4ff, #007bff);
     padding: 20px;
     font-family: Arial, sans-serif;
@@ -51,6 +51,7 @@
     color: #fff;
     font-size: 15px;
     margin-left: -10px;
+    margin-bottom: 5px;
   }
   
   .form-options {
@@ -108,11 +109,16 @@
   }
   @media (max-width: 768px) {
     .login-form {
-        width: 80%;
-        padding: 20px;
+      width: 80%;
+      padding: 20px;
     }
-
+  
     .logo {
-        font-size: 24px;
+      font-size: 24px;
     }
-}
+  
+    .login-but {
+      font-size: 14px;
+    }
+  }
+  

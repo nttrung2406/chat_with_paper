@@ -4,7 +4,7 @@ import Sidebar from "./components/Sidebar";
 import Chatbox from "./components/Chatbox";
 import LoginForm from "./components/LoginForm";
 import SignUpForm from "./components/SignupForm"; 
-import LogPage from "./components/LogPage";
+// import LogPage from "./components/LogPage";
 import "./App.css";
 
 function App() {
@@ -26,7 +26,7 @@ function AppContent() {
         <Route path="/" element={<Chatbox />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/signup" element={<SignUpForm />} /> 
-        <Route path="/logs" element={<LogPage />} />
+        {/* <Route path="/logs" element={<LogPage />} /> */}
       </Routes>
     </div>
   );
