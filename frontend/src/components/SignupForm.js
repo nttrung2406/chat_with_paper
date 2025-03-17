@@ -39,7 +39,7 @@ const SignUpForm = () => {
       <div className="login-form">
         <div className="logo">WELCOME</div>
         <h2>Sign up</h2>
-        {error && <div className="error-message">{error}</div>}
+        {error && <div className="error-message">{typeof error === "string" ? error : JSON.stringify(error)}</div>}
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="name">Name</label>

@@ -26,7 +26,7 @@ const LoginForm = () => {
 
     try {
       const loginData = new URLSearchParams();
-      loginData.append("email", formData.email);
+      loginData.append("username", formData.email);
       loginData.append("password", formData.password);
 
       const response = await axios.post("http://127.0.0.1:8000/token", loginData, {
@@ -53,7 +53,7 @@ const LoginForm = () => {
       <div className="login-form">
         <div className="logo">WELCOME</div>
         <h2>Log in</h2>
-        {error && <div className="error-message">{error}</div>}
+        {error && <div className="error-message">{typeof error === "string" ? error : JSON.stringify(error)}</div>}
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="username">Email</label>
