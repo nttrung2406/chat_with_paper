@@ -6,11 +6,11 @@ const Sidebar = () => {
   return (
     
     <div className="sidebar">
-      
+      <ClickSpark>
       <h1 href="\">Chat with PDF</h1>
       <h3>Upload PDF</h3>
       <Upload />
-      <ClickSpark>
+      
       </ClickSpark>
       <footer className="sidebar-footer">By @ Trung Nguyen</footer>
     </div>
