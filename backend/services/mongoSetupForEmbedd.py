@@ -10,11 +10,4 @@ client = MongoClient(mongo_uri)
 db = client["chat_with_pdf"]
 collection = db["documents"]
 
-document = {
-    "text": "Example text",
-    "embedding": [0.0] * 512 
-}
-
-collection.insert_one(document)
-
 print("MongoDB setup completed!")

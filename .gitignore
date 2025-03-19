@@ -14,3 +14,4 @@
 *.pyc
 /frontend/node_modules
 *.pack
+/frontend/node_modules

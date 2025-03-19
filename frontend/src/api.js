@@ -11,7 +11,6 @@ export const uploadPDF = async (file) => {
 };
 
 
-
 export async function chatWithRAG(prompt) {
   try {
       const response = await fetch("http://127.0.0.1:8000/chat/text", {
@@ -27,14 +26,9 @@ export async function chatWithRAG(prompt) {
       }
 
       const data = await response.json();
-
-      if (!data.answer) {
-          throw new Error("Invalid response structure from backend");
-      }
-
       return data.answer; 
   } catch (error) {
-      console.error("Chat failed:", error);
-      return "Error: Unable to get a response from the server.";
+    console.error("Error in chatWithRAG:", error);
+    throw error;
   }
 }

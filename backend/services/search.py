@@ -20,19 +20,9 @@ def search_relevant_passages(query, top_k=5):
     
     results = list(collection.find())
     if not results:
-        print("---------------------No documents found in MongoDB.-------------------")
+        print("---------------------No documents found in MongoDB.-------------------", results)
         return []
     
-    # sorted_results = sorted(
-    #     results,
-    #     key=lambda x: torch.cosine_similarity(query_embedding, torch.tensor(x["embedding"], device=device), dim=0),
-    #     reverse=True
-    # )
-    
-    # if sorted_results[0]["score"] < 0.3:
-    #     return "Please ask another question."
-    
-    # return [r["text"] for r in sorted_results[:top_k]]
     scored_results = []
     
     for doc in results:
@@ -45,8 +35,5 @@ def search_relevant_passages(query, top_k=5):
         scored_results.append((similarity.item(), doc["text"]))
 
     scored_results.sort(reverse=True, key=lambda x: x[0])
-
-    if not scored_results or scored_results[0][0] < 0.3:
-        return ["Please ask another question."]
-
+    print("Scored results:", scored_results)
     return [text for _, text in scored_results[:top_k]]

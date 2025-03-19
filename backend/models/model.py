@@ -5,7 +5,7 @@ from llama_cpp import Llama
 import os
 root = os.getcwd()
 
-MODEL_PATH = os.path.join(root, "models", "llama-2-7b.gguf")  
+MODEL_PATH = os.path.join(root, "models", "gemma-2b.gguf")  
 
 class MiniLMEmbedding:
     def __init__(self):
@@ -25,12 +25,12 @@ class MiniLMEmbedding:
 class LLModel:
     def __init__(self, model_path=MODEL_PATH):
         self.model = Llama(model_path=model_path,
-                            n_ctx=2048, 
+                            n_ctx=4096, 
                             n_threads=6,
                             n_gpu_layers=32 if torch.cuda.is_available() else 0)
 
     def extract_text(self, text_prompt, max_tokens=1000, temperature=0.7):
-        """Generate a longer response from Gemma."""
+        """Generate a longer response."""
         output = self.model(
             text_prompt, 
             max_tokens=max_tokens, 

@@ -26,5 +26,3 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends()):
         data={"sub": user["email"]}, expires_delta=access_token_expires
     )
     return {"access_token": access_token, "token_type": "bearer"}
-
-print("loginRoutes.py loaded!")
