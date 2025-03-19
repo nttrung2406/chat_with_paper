@@ -33,7 +33,8 @@ A RAG application for q&amp;a with paper
 
 # Workflow
 
-![image](https://github.com/user-attachments/assets/5f4cc49a-d4ba-4102-850f-acadd451d7f9)
+![architecture](https://github.com/user-attachments/assets/b474ab4d-4d93-42ce-bba9-f02141c72fac)
+
 
 # Advanced RAG technique
 
