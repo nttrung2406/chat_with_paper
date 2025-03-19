@@ -1,6 +1,5 @@
-from fastapi import FastAPI, WebSocket, Depends, HTTPException, status
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from pymongo import MongoClient
 import os
 from dotenv import load_dotenv

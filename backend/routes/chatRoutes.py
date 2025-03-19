@@ -25,7 +25,7 @@ async def chat_with_rag(request: ChatRequest):
 
         full_prompt = f"You are a helpful assistant. Using the following information from this \n{context}\n, answer the question: '{prompt}'.If the information is not in the provided context, you can use external knowledge to answer the question. Limit your response to a single paragraph."
 
-        print(f"Full prompt: {full_prompt}")
+        # print(f"Full prompt: {full_prompt}")
 
         response = rag_model.extract_text(full_prompt)
         cleaned_response = "\n".join(

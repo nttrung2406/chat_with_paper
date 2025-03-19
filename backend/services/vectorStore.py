@@ -10,8 +10,11 @@ client = MongoClient(mongo_uri)
 db = client["rag_db"]
 collection = db["embeddings"]
 
-def store_embedding(text, embedding):
-    collection.insert_one({"text": text, "embedding": embedding})
+def store_embedding(text, embedding, header="General"):
+    """Store text embeddings with contextual headers in MongoDB."""
+    augmented_text = f"{header}: {text}"
+    collection.insert_one({"header": header, "text": augmented_text, "embedding": embedding})
+
 
 def search_embedding(query_embedding, top_k=5):
     results = collection.find()

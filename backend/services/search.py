@@ -32,6 +32,10 @@ def search_relevant_passages(query, top_k=5):
         doc_embedding = torch.tensor(doc["embedding"], device=device)
         similarity = torch.cosine_similarity(query_embedding, doc_embedding, dim=0)
 
+        header = doc.get("header", "General")
+        if header.lower() in query.lower():
+            similarity += 0.1
+            
         scored_results.append((similarity.item(), doc["text"]))
 
     scored_results.sort(reverse=True, key=lambda x: x[0])
