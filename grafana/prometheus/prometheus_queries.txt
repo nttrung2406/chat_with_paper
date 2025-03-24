@@ -1,0 +1,11 @@
+# Average request latency
+rate(http_request_latency_seconds_sum[5m]) / rate(http_request_latency_seconds_count[5m])
+
+# Error rate
+rate(http_request_count_total{status_code=~"5.*"}[5m])
+
+# PDF processing time (95th percentile)
+histogram_quantile(0.95, rate(pdf_processing_time_seconds_bucket[5m]))
+
+# LLM response time (average)
+rate(llm_response_time_seconds_sum[5m]) / rate(llm_response_time_seconds_count[5m])
