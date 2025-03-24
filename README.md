@@ -5,7 +5,9 @@ A RAG application for q&amp;a with paper
 
 1. Core AI (LLM for RAG)
 
-✅ MiniLM – Handles text + query.
+✅ MiniLM – Handles text + query embedding creation.
+
+✅ Gemma2-2b - Handle RAG.
 
 💡 Inference Engine: Use llama.cpp for ultra-lightweight deployment.
 
@@ -44,10 +46,27 @@ This is the CCH workflow:
 
 ![image](https://github.com/user-attachments/assets/1b256506-e7e0-4dcc-8017-16a4c7582057)
 
-# Chatbot UI
+# UI
 
 ![image](https://github.com/user-attachments/assets/e4ea2e49-ba0d-4d68-ba34-71b70508917d)
 
+# Installation and setup
+
+For running throughout the project:
+
+>> cd ../frontend
+>>
+>> npm start
+
+For running Prometheus and Grafana:
+
+- Prometheus:
+
+>> prometheus.exe --config.file=[Disk]\Prometheus\prometheus.yml
+
+- Grafana:
+
+>> grafana.exe
 
 
 
