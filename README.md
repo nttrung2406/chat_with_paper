@@ -38,13 +38,13 @@ A RAG application for q&amp;a with paper
 
 # Advanced RAG technique
 
-FOr improving RAG performance, I apply Contextual Chunk Headers by adding contextual headers to text chunks before embedding them. 
+For improving RAG performance, I apply Contextual Chunk Headers by adding contextual headers to text chunks before embedding them. 
 
 This is the CCH workflow:
 
 ![image](https://github.com/user-attachments/assets/1b256506-e7e0-4dcc-8017-16a4c7582057)
 
-# CHatbot UI
+# Chatbot UI
 
 ![image](https://github.com/user-attachments/assets/e4ea2e49-ba0d-4d68-ba34-71b70508917d)
 
