@@ -4,15 +4,23 @@ from pymongo import MongoClient
 import os
 from dotenv import load_dotenv
 from routes import pdfRoutes, searchRoutes, chatRoutes, welcomeRouter, registerRoutes, loginRoutes
+from prometheus_fastapi_instrumentator import Instrumentator
+from services.logging import logging_middleware
+from contextlib import asynccontextmanager
 
 load_dotenv()
 app = FastAPI(title="RAG System")
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    Instrumentator().instrument(app).expose(app, endpoint="/metrics")
+    yield
 
 client = MongoClient(os.getenv("MONGO_URI"))
 db = client["rag_db"]
 users_collection = db["users"]
 
-
+app.middleware("http")(logging_middleware)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  

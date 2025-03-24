@@ -5,3 +5,5 @@ paddleocr
 pymilvus
 llama-cpp-python
 paddlepaddle
+prometheus-fastapi-instrumentator
+prometheus-client

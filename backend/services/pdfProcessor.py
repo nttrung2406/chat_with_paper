@@ -1,7 +1,8 @@
 import fitz  # PyMuPDF
 from paddleocr import PaddleOCR
 import re
-import string
+import time
+# from logging import PDF_PROCESSING_TIME
 
 EMOJI_PATTERN = re.compile("["
     u"\U0001F600-\U0001F64F"  # Emoticons
@@ -25,6 +26,7 @@ def clean_text(text):
 
 def extract_text_from_pdf(pdf_content):
     """Extract text from a PDF, using direct text extraction first, then OCR as a fallback."""
+    # start_time = time.time()
     try:
         pdf_document = fitz.open(stream=pdf_content, filetype="pdf")
         extracted_text = ""
@@ -48,7 +50,9 @@ def extract_text_from_pdf(pdf_content):
                 
                 chunk_text = f"{current_header if current_header else 'General'}: {text}"
                 extracted_text += chunk_text + "\n"
-        
+
+        # duration = time.time() - start_time
+        # PDF_PROCESSING_TIME.labels(status="success").observe(duration)
         return extracted_text
     except Exception as e:
         print(f"Direct text extraction failed: {e}. Using OCR as fallback.")
@@ -74,6 +78,8 @@ def extract_text_from_pdf(pdf_content):
                 chunk_text = f"{current_header if current_header else 'General'}: {text}"
                 extracted_text += chunk_text + "\n"
 
+        # duration = time.time() - start_time
+        # PDF_PROCESSING_TIME.labels(status="error").observe(duration)
         return extracted_text
 
 
