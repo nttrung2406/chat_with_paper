@@ -54,19 +54,29 @@ This is the CCH workflow:
 
 For running throughout the project:
 
+'''bash
+
 >> cd ../frontend
->>
+
 >> npm start
+>> 
+'''
 
 For running Prometheus and Grafana:
 
 - Prometheus:
 
->> prometheus.exe --config.file=[Disk]\Prometheus\prometheus.yml
+'''bash
 
+prometheus.exe --config.file=[Disk]\Prometheus\prometheus.yml
+
+'''
 - Grafana:
 
->> grafana.exe
+'''bash
 
+grafana.exe
+
+'''
 
 
