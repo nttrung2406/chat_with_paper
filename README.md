@@ -56,9 +56,9 @@ For running throughout the project:
 
 ```bash
 
->> cd ../frontend
+cd ../frontend
 
->> npm start
+npm start
 
 ```
 
